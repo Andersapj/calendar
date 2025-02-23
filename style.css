@@ -101,3 +101,11 @@ body {
     text-decoration: none;
     cursor: pointer;
   }
+
+  #submit-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 350px;
+  }

@@ -128,6 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
     span.onclick = function () {
       submitbox.style.display = "none";
     };
+    const submitmodal = document.getElementById("submit-modal");
+    submitmodal.onclick = function () {
+      window.location.href = "confirmation.html";
+    };
+
     // Send selected days to the server
     fetch("http://localhost:3000/api/selected-days", {
       method: "POST",
