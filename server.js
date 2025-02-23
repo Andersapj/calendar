@@ -8,7 +8,6 @@ const port = 3000;
 
 // Enable CORS for all routes
 app.use(cors());
-app.options("*", cors());
 
 const pool = new Pool({
   user: "postgres",
@@ -28,6 +27,13 @@ app.use((req, res, next) => {
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
+});
+
+app.options("*", cors()); // Enable pre-flight requests for all routes
+
+// Add a route to handle GET requests to the root URL
+app.get("/", (req, res) => {
+  res.send("Welcome to the Calendar API");
 });
 
 app.post("/api/selected-days", async (req, res) => {
@@ -51,7 +57,9 @@ app.post("/api/selected-days", async (req, res) => {
     res.status(200).json({ message: "Dates saved successfully" });
   } catch (error) {
     console.error("Error saving dates:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.message });
   }
 });
 

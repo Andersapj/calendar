@@ -121,7 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedDays.push(formattedDate);
     });
     console.log(selectedDays);
-
+    submitbox.style.display = "block";
+    const span = document.getElementsByClassName("close")[0];
+    const modalText = document.getElementById("modaltext");
+    modalText.textContent = `You have selected ${selectedDays} days. Do you want to submit?`;
+    span.onclick = function () {
+      submitbox.style.display = "none";
+    };
     // Send selected days to the server
     fetch("http://localhost:3000/api/selected-days", {
       method: "POST",
@@ -138,4 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error:", error);
       });
   });
+
+  const span = document.getElementsByClassName("close")[0];
+  span.onclick = function () {
+    submitbox.style.display = "none";
+  };
 });
